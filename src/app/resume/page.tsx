@@ -40,20 +40,27 @@ const education = [
   },
   {
     id: 2,
+    degree: "Ultimate Framer Masterclass",
+    institution: "Insert Frame",
+    year: "2025",
+    description: "Learned how to build responsive, animated websites using Framer."
+  },
+  {
+    id: 3,
     degree: "Frontend Simplified Bootcamp",
     institution: "FES Institute",
     year: "2024",
     description: "Brushed up on my HTML, CSS, and JavaScript skills. Learned about React, Next.js, and Tailwind CSS."
   },
   {
-    id: 3,
+    id: 4,
     degree: "Graphic Design Course",
     institution: "Community College of Denver",
     year: "2022",
     description: "Learned how to use Adobe Creative Suite."
   },
   {
-    id: 4,
+    id: 5,
     degree: "Full Stack Development Bootcamp",
     institution: "University of Denver",
     year: "2018",

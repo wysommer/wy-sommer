@@ -28,8 +28,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geist.variable} ${grapeNuts.variable}`}>
-      <body className="text-black dark:text-white min-h-screen relative">
+    <html lang="en" className={`${geist.variable} ${grapeNuts.variable}`} suppressHydrationWarning>
+      <body className="min-h-screen relative bg-white text-black dark:bg-gray-950 dark:text-white transition-colors duration-300">
         <ThemeProvider>
           {/* Navigation - four corners with minimal styling */}
           <nav className="fixed w-full h-full pointer-events-none z-50">

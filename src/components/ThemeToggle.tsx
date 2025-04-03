@@ -4,7 +4,7 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   // Avoid hydration mismatch by only rendering the component after it's mounted
@@ -12,15 +12,22 @@ export function ThemeToggle() {
     setMounted(true);
   }, []);
 
-  if (!mounted) return null;
+  // Use a simple placeholder during server-side rendering
+  if (!mounted) {
+    return (
+      <div className="fixed top-8 left-1/2 -translate-x-1/2 z-50 p-2 rounded-full bg-white dark:bg-gray-800 text-black dark:text-white shadow-md pointer-events-none">
+        <div className="w-5 h-5" />
+      </div>
+    );
+  }
 
   return (
     <button
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
       className="fixed top-8 left-1/2 -translate-x-1/2 z-50 p-2 rounded-full bg-white dark:bg-gray-800 text-black dark:text-white shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors pointer-events-auto"
       aria-label="Toggle theme"
     >
-      {theme === "dark" ? (
+      {resolvedTheme === "dark" ? (
         // Sun icon for light mode
         <svg
           xmlns="http://www.w3.org/2000/svg"

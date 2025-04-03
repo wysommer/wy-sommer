@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import JobPostModal, { JobListing } from './_components/JobPostModal';
 import JobDetailModal from './_components/JobDetailModal';
@@ -82,7 +82,7 @@ const jobTypes = ["All Types", "Full-time", "Part-time", "Contract", "Freelance"
 const locations = ["All Locations", "Remote", "New York, NY", "San Francisco, CA", "Austin, TX", "Seattle, WA"];
 
 export default function JobBoard() {
-  const [jobListings, setJobListings] = useState<JobListing[]>(initialJobListings);
+  const [jobListings, setJobListings] = useState<JobListing[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedType, setSelectedType] = useState('All Types');
   const [selectedLocation, setSelectedLocation] = useState('All Locations');
@@ -90,6 +90,28 @@ export default function JobBoard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const [selectedJob, setSelectedJob] = useState<JobListing | null>(null);
+  
+  // Load job listings from localStorage on initial render
+  useEffect(() => {
+    const storedJobs = localStorage.getItem('jobListings');
+    if (storedJobs) {
+      try {
+        setJobListings(JSON.parse(storedJobs));
+      } catch (error) {
+        console.error('Failed to parse stored jobs:', error);
+        setJobListings(initialJobListings);
+      }
+    } else {
+      setJobListings(initialJobListings);
+    }
+  }, []);
+  
+  // Save job listings to localStorage whenever they change
+  useEffect(() => {
+    if (jobListings.length > 0) {
+      localStorage.setItem('jobListings', JSON.stringify(jobListings));
+    }
+  }, [jobListings]);
   
   // Filter jobs based on search term and filters
   const filteredJobs = jobListings.filter(job => {
@@ -111,6 +133,16 @@ export default function JobBoard() {
     setIsModalOpen(false);
   };
   
+  const handleOpenDetailModal = (job: JobListing) => {
+    setSelectedJob(job);
+    setIsDetailModalOpen(true);
+  };
+  
+  const handleCloseDetailModal = () => {
+    setIsDetailModalOpen(false);
+    setSelectedJob(null);
+  };
+  
   const handleSubmitJob = (jobData: Omit<JobListing, 'id' | 'date'>) => {
     // Create a new job listing with a generated ID and the current date
     const newJob: JobListing = {
@@ -126,14 +158,14 @@ export default function JobBoard() {
     handleCloseModal();
   };
   
-  const handleOpenDetailModal = (job: JobListing) => {
-    setSelectedJob(job);
-    setIsDetailModalOpen(true);
+  // Handle job deletion if needed
+  const handleDeleteJob = (jobId: number) => {
+    setJobListings(prev => prev.filter(job => job.id !== jobId));
   };
   
-  const handleCloseDetailModal = () => {
-    setIsDetailModalOpen(false);
-    setSelectedJob(null);
+  // Handle resetting to initial job listings
+  const handleResetJobs = () => {
+    setJobListings(initialJobListings);
   };
   
   return (
