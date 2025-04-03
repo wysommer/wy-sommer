@@ -49,9 +49,44 @@ export default function Home() {
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
   const [sliderPosition, setSliderPosition] = useState(0);
+  const [isSliderDragging, setIsSliderDragging] = useState(false);
   
   const carouselRef = useRef<HTMLDivElement>(null);
   const sliderRef = useRef<HTMLDivElement>(null);
+  const sliderHandleRef = useRef<HTMLDivElement>(null);
+  
+  // Add event listeners for slider dragging
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (isSliderDragging && sliderRef.current && carouselRef.current) {
+        const slider = sliderRef.current;
+        const rect = slider.getBoundingClientRect();
+        const position = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+        
+        // Update slider position
+        setSliderPosition(position);
+        
+        // Update carousel scroll position
+        const carousel = carouselRef.current;
+        const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+        carousel.scrollLeft = (maxScroll * position) / 100;
+      }
+    };
+    
+    const handleMouseUp = () => {
+      setIsSliderDragging(false);
+    };
+    
+    if (isSliderDragging) {
+      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mouseup', handleMouseUp);
+    }
+    
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [isSliderDragging]);
   
   // Update slider position when active index changes
   useEffect(() => {
@@ -62,7 +97,7 @@ export default function Home() {
   
   // Handle scroll in carousel
   const handleScroll = () => {
-    if (!carouselRef.current || isDragging) return;
+    if (!carouselRef.current || isDragging || isSliderDragging) return;
     
     const carousel = carouselRef.current;
     const scrollPosition = carousel.scrollLeft;
@@ -105,19 +140,27 @@ export default function Home() {
     setIsDragging(false);
   };
   
-  // Slider control
+  // Slider control - handle initial click on slider track
   const handleSliderMouseDown = (e: React.MouseEvent) => {
-    if (!carouselRef.current) return;
+    if (!sliderRef.current || !carouselRef.current) return;
     
-    const slider = e.currentTarget;
+    const slider = sliderRef.current;
     const rect = slider.getBoundingClientRect();
     const position = ((e.clientX - rect.left) / rect.width) * 100;
-    setSliderPosition(Math.max(0, Math.min(100, position)));
+    const newPosition = Math.max(0, Math.min(100, position));
+    
+    setSliderPosition(newPosition);
     
     // Set carousel scroll position based on slider
     const carousel = carouselRef.current;
-    const targetScroll = (carousel.scrollWidth - carousel.clientWidth) * (position / 100);
+    const targetScroll = (carousel.scrollWidth - carousel.clientWidth) * (newPosition / 100);
     carousel.scrollLeft = targetScroll;
+  };
+  
+  // Slider handle dragging - separate from track clicking
+  const handleSliderHandleMouseDown = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent triggering the track's mousedown
+    setIsSliderDragging(true);
   };
   
   // Scroll to specific project
@@ -220,34 +263,23 @@ export default function Home() {
             {/* Slider control */}
             <div className="mx-auto max-w-[600px] mt-6">
               <div 
-                className="relative h-1 bg-gray-200 dark:bg-gray-800 rounded-full my-4"
+                ref={sliderRef}
+                className="relative h-1 bg-gray-200 dark:bg-gray-800 rounded-full my-4 cursor-pointer"
                 onMouseDown={handleSliderMouseDown}
               >
                 {/* Slider handle */}
                 <div 
-                  className="absolute top-1/2 transform -translate-y-1/2 h-3 w-3 bg-black dark:bg-white rounded-full cursor-pointer"
+                  ref={sliderHandleRef}
+                  className="absolute top-1/2 transform -translate-y-1/2 h-5 w-5 bg-black dark:bg-white rounded-full cursor-grab active:cursor-grabbing touch-none"
                   style={{ left: `${sliderPosition}%` }}
+                  onMouseDown={handleSliderHandleMouseDown}
                 />
                 {/* Active track */}
                 <div 
-                  className="absolute top-0 left-0 h-full bg-black dark:bg-white rounded-full"
+                  className="absolute top-0 left-0 h-full bg-black dark:bg-white rounded-full pointer-events-none"
                   style={{ width: `${sliderPosition}%` }}
                 />
               </div>
-            </div>
-            
-            {/* Dots */}
-            <div className="flex justify-center gap-2 mt-4">
-              {projects.map((_, index) => (
-                <button
-                  key={index}
-                  className={`w-2 h-2 rounded-full ${
-                    index === activeIndex ? 'bg-black dark:bg-white' : 'bg-gray-300 dark:bg-gray-700'
-                  }`}
-                  onClick={() => scrollToProject(index)}
-                  aria-label={`View project ${index + 1}`}
-                />
-              ))}
             </div>
           </div>
           
