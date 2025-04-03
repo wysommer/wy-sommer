@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
 import JobPostModal, { JobListing } from './_components/JobPostModal';
 import JobDetailModal from './_components/JobDetailModal';
 
@@ -159,14 +158,14 @@ export default function JobBoard() {
   };
   
   // Handle job deletion if needed
-  const handleDeleteJob = (jobId: number) => {
-    setJobListings(prev => prev.filter(job => job.id !== jobId));
-  };
+  // const handleDeleteJob = (jobId: number) => {
+  //   setJobListings(prev => prev.filter(job => job.id !== jobId));
+  // };
   
   // Handle resetting to initial job listings
-  const handleResetJobs = () => {
-    setJobListings(initialJobListings);
-  };
+  // const handleResetJobs = () => {
+  //   setJobListings(initialJobListings);
+  // };
   
   return (
     <div className="min-h-screen py-32 px-8 gradient-job-board">
@@ -177,7 +176,7 @@ export default function JobBoard() {
               job board
             </h1>
             <p className="text-gray-600 dark:text-gray-400 max-w-xl">
-              post a job offer if you're interested in hiring me
+              post a job offer if you&apos;re interested in hiring me
             </p>
           </div>
           
@@ -340,7 +339,7 @@ export default function JobBoard() {
             <div className="text-center py-20 border border-gray-200 dark:border-gray-800">
               <h3 className="font-grape-nuts text-2xl mb-4">no jobs found</h3>
               <p className="text-gray-600 dark:text-gray-400 mb-8">
-                Try adjusting your search or filters to find what you're looking for.
+                Try adjusting your search or filters to find what you&apos;re looking for.
               </p>
               <button 
                 onClick={() => {
@@ -360,7 +359,7 @@ export default function JobBoard() {
         <div className="mt-20 border border-gray-200 dark:border-gray-800 p-12 text-center">
           <h2 className="font-grape-nuts text-3xl mb-4">want to hire me?</h2>
           <p className="text-gray-600 dark:text-gray-400 max-w-lg mx-auto mb-8">
-            post your job offer here and i'll reach out to you if i'm interested
+            post your job offer here and i&apos;ll reach out to you if i&apos;m interested
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-6">
             <button 

@@ -164,14 +164,14 @@ export default function Home() {
   };
   
   // Scroll to specific project
-  const scrollToProject = (index: number) => {
-    if (!carouselRef.current) return;
+  // const scrollToProject = (index: number) => {
+  //   if (!carouselRef.current) return;
     
-    const carousel = carouselRef.current;
-    const cardWidth = carousel.scrollWidth / projects.length;
-    carousel.scrollLeft = cardWidth * index;
-    setActiveIndex(index);
-  };
+  //   const carousel = carouselRef.current;
+  //   const cardWidth = carousel.scrollWidth / projects.length;
+  //   carousel.scrollLeft = cardWidth * index;
+  //   setActiveIndex(index);
+  // };
 
   return (
     <>
@@ -187,9 +187,11 @@ export default function Home() {
             
             {/* Profile photo outside of gradient effects */}
             <div className="w-16 h-16 md:w-20 md:h-20 mx-auto mb-6 relative overflow-hidden rounded-full">
-              <img 
+              <Image 
                 src="/images/profile.JPG"
                 alt="Wÿ Sommer profile"
+                width={80}
+                height={80}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -199,7 +201,7 @@ export default function Home() {
             </p>
             
             <p className="font-grape-nuts text-base md:text-lg mb-12 text-gray-600 dark:text-gray-300 max-w-prose-narrow mx-auto font-semibold">
-              about me: i love color, i love designing, i love creating. i'm from New York, i'm a pisces, i'm organized.
+              about me: i love color, i love designing, i love creating. i&apos;m from New York, i&apos;m a pisces, i&apos;m organized.
             </p>
           </div>
           
@@ -220,7 +222,7 @@ export default function Home() {
                 onMouseLeave={handleMouseUp}
                 onScroll={handleScroll}
               >
-                {projects.map((project, index) => (
+                {projects.map((project) => (
                   <div 
                     key={project.id}
                     className="flex-shrink-0 w-[260px] rounded-2xl overflow-hidden shadow-lg snap-center transition-transform hover:scale-[1.02] duration-300"

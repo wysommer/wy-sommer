@@ -52,8 +52,6 @@ const categories = ["all", "web", "mobile", "design"];
 
 export default function Portfolio() {
   const [activeCategory, setActiveCategory] = useState("all");
-  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
-
   // Filter projects based on active category
   const filteredProjects = activeCategory === "all" 
     ? projects 
@@ -89,8 +87,6 @@ export default function Portfolio() {
             <div 
               key={project.id}
               className="project-card p-6 hover-lift"
-              onMouseEnter={() => setHoveredProject(project.id)}
-              onMouseLeave={() => setHoveredProject(null)}
             >
               <div className="aspect-[3/2] w-full bg-gray-100 dark:bg-gray-900 mb-6 relative overflow-hidden">
                 <Image 

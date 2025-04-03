@@ -35,7 +35,7 @@ export default function Contact() {
         message: '',
         subject: 'general inquiry',
       });
-    } catch (error) {
+    } catch (_error) {
       setFormStatus('error');
     }
   };
@@ -56,7 +56,7 @@ export default function Contact() {
               <div className="border border-gray-200 dark:border-gray-800 p-8 text-center">
                 <h3 className="font-grape-nuts text-2xl mb-4">message sent</h3>
                 <p className="text-gray-600 dark:text-gray-400 mb-6">
-                  Thanks for reaching out. I'll get back to you soon.
+                  Thanks for reaching out. I&apos;ll get back to you soon.
                 </p>
                 <button 
                   onClick={() => setFormStatus('idle')}
@@ -161,7 +161,7 @@ export default function Contact() {
               <div className="w-full h-full flex items-center justify-center p-8">
                 <div className="text-center">
                   <p className="text-gray-600 dark:text-gray-400 mb-8">
-                    Select a time that works for you, and let's discuss your project needs.
+                    Select a time that works for you, and let&apos;s discuss your project needs.
                   </p>
                   <div className="space-y-4">
                     <p className="text-sm">Available time slots:</p>
