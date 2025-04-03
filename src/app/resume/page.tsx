@@ -33,22 +33,36 @@ const experience = [
 const education = [
   {
     id: 1,
-    degree: "master of science in computer science",
-    institution: "Tech University",
-    year: "2016",
-    description: "Focused on Human-Computer Interaction and Web Technologies. Graduated with honors."
+    degree: "Build With AI",
+    institution: "Switch Dimension",
+    year: "2025",
+    description: "Learned how to build full stack applications using cursor AI."
   },
   {
     id: 2,
-    degree: "bachelor of arts in design",
-    institution: "Arts College",
-    year: "2014",
-    description: "Specialized in Digital Design and Interactive Media. Received Dean's Award for Excellence."
+    degree: "Frontend Simplified Bootcamp",
+    institution: "FES Institute",
+    year: "2024",
+    description: "Brushed up on my HTML, CSS, and JavaScript skills. Learned about React, Next.js, and Tailwind CSS."
+  },
+  {
+    id: 3,
+    degree: "Graphic Design Course",
+    institution: "Community College of Denver",
+    year: "2022",
+    description: "Learned how to use Adobe Creative Suite."
+  },
+  {
+    id: 4,
+    degree: "Full Stack Development Bootcamp",
+    institution: "University of Denver",
+    year: "2018",
+    description: "Learned about HTML, CSS, JavaScript, Node.js, Express, MongoDB, and React. Also learned about Git and GitHub."
   }
 ];
 
 const skills = [
-  { category: "development", items: ["JavaScript", "TypeScript", "React", "Next.js", "Node.js", "HTML/CSS", "Tailwind CSS"] },
+  { category: "development", items: ["Cursor AI", "JavaScript", "TypeScript", "React", "Next.js", "Node.js", "HTML/CSS", "Tailwind CSS"] },
   { category: "design", items: ["UI/UX Design", "Wireframing", "Prototyping", "Figma", "Adobe Creative Suite"] },
   { category: "other", items: ["Project Management", "Team Leadership", "Agile Methodology", "Performance Optimization"] }
 ];
