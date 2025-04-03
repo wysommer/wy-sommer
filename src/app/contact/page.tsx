@@ -35,7 +35,8 @@ export default function Contact() {
         message: '',
         subject: 'general inquiry',
       });
-    } catch (_error) {
+    } catch (error) {
+      console.error('Error submitting form:', error);
       setFormStatus('error');
     }
   };
