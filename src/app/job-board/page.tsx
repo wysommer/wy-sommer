@@ -2,9 +2,11 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import JobPostModal, { JobListing } from './_components/JobPostModal';
+import JobDetailModal from './_components/JobDetailModal';
 
 // Sample job listings data (would come from a database in a real application)
-const jobListings = [
+const initialJobListings = [
   {
     id: 1,
     title: "senior front-end developer",
@@ -19,7 +21,8 @@ const jobListings = [
       "Experience with state management solutions"
     ],
     date: "2023-03-25",
-    type: "Full-time"
+    type: "Full-time",
+    website: "https://techinnovations.example.com"
   },
   {
     id: 2,
@@ -35,7 +38,8 @@ const jobListings = [
       "Portfolio demonstrating strong visual design skills"
     ],
     date: "2023-03-20",
-    type: "Full-time"
+    type: "Full-time",
+    website: "https://creativesolutions.example.com"
   },
   {
     id: 3,
@@ -51,7 +55,8 @@ const jobListings = [
       "Strong problem-solving skills"
     ],
     date: "2023-03-18",
-    type: "Full-time"
+    type: "Full-time",
+    website: "https://startupventures.example.com"
   },
   {
     id: 4,
@@ -67,7 +72,8 @@ const jobListings = [
       "Understanding of web accessibility standards"
     ],
     date: "2023-03-15",
-    type: "Contract"
+    type: "Contract",
+    website: "https://digitalmarketing.example.com"
   }
 ];
 
@@ -76,10 +82,14 @@ const jobTypes = ["All Types", "Full-time", "Part-time", "Contract", "Freelance"
 const locations = ["All Locations", "Remote", "New York, NY", "San Francisco, CA", "Austin, TX", "Seattle, WA"];
 
 export default function JobBoard() {
+  const [jobListings, setJobListings] = useState<JobListing[]>(initialJobListings);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedType, setSelectedType] = useState('All Types');
   const [selectedLocation, setSelectedLocation] = useState('All Locations');
   const [isFilterExpanded, setIsFilterExpanded] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+  const [selectedJob, setSelectedJob] = useState<JobListing | null>(null);
   
   // Filter jobs based on search term and filters
   const filteredJobs = jobListings.filter(job => {
@@ -93,6 +103,39 @@ export default function JobBoard() {
     return matchesSearch && matchesType && matchesLocation;
   });
   
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+  
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+  
+  const handleSubmitJob = (jobData: Omit<JobListing, 'id' | 'date'>) => {
+    // Create a new job listing with a generated ID and the current date
+    const newJob: JobListing = {
+      ...jobData,
+      id: Math.max(0, ...jobListings.map(job => job.id)) + 1, // Generate unique ID
+      date: new Date().toISOString().split('T')[0], // Format date as YYYY-MM-DD
+    };
+    
+    // Add the new job to the job listings array
+    setJobListings(prev => [newJob, ...prev]);
+    
+    // Close the modal
+    handleCloseModal();
+  };
+  
+  const handleOpenDetailModal = (job: JobListing) => {
+    setSelectedJob(job);
+    setIsDetailModalOpen(true);
+  };
+  
+  const handleCloseDetailModal = () => {
+    setIsDetailModalOpen(false);
+    setSelectedJob(null);
+  };
+  
   return (
     <div className="min-h-screen py-32 px-8 gradient-job-board">
       <div className="max-w-6xl mx-auto">
@@ -102,12 +145,15 @@ export default function JobBoard() {
               job board
             </h1>
             <p className="text-gray-600 dark:text-gray-400 max-w-xl">
-              find web design and development opportunities or post your own listings
+              post a job offer if you're interested in hiring me
             </p>
           </div>
           
           <div className="mt-8 md:mt-0">
-            <button className="btn-primary">
+            <button 
+              className="btn-primary"
+              onClick={handleOpenModal}
+            >
               post a job
             </button>
           </div>
@@ -194,7 +240,33 @@ export default function JobBoard() {
                 <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-6">
                   <div>
                     <h2 className="font-grape-nuts text-2xl mb-2">{job.title}</h2>
-                    <p className="text-gray-600 dark:text-gray-400 mb-4">{job.company}</p>
+                    <div className="flex items-center gap-2 mb-4">
+                      <p className="text-gray-600 dark:text-gray-400">{job.company}</p>
+                      <span className="text-gray-300">•</span>
+                      <a 
+                        href={job.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="text-sm flex items-center gap-1 text-blue-500 dark:text-blue-400 hover:underline"
+                      >
+                        <svg 
+                          className="w-3 h-3" 
+                          fill="none" 
+                          stroke="currentColor" 
+                          viewBox="0 0 24 24" 
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path 
+                            strokeLinecap="round" 
+                            strokeLinejoin="round" 
+                            strokeWidth="2" 
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                          />
+                        </svg>
+                        website
+                      </a>
+                    </div>
                   </div>
                   <div className="mt-2 md:mt-0 flex flex-wrap gap-3">
                     <span className="text-sm border border-gray-200 dark:border-gray-800 px-3 py-1">
@@ -223,7 +295,10 @@ export default function JobBoard() {
                     <span className="text-gray-800 dark:text-gray-200">{job.salaryRange}</span>
                   </div>
                   
-                  <button className="btn-minimal">
+                  <button 
+                    className="btn-minimal"
+                    onClick={() => handleOpenDetailModal(job)}
+                  >
                     view details
                   </button>
                 </div>
@@ -251,20 +326,34 @@ export default function JobBoard() {
         
         {/* Employer CTA - Minimal Style */}
         <div className="mt-20 border border-gray-200 dark:border-gray-800 p-12 text-center">
-          <h2 className="font-grape-nuts text-3xl mb-4">are you hiring?</h2>
+          <h2 className="font-grape-nuts text-3xl mb-4">want to hire me?</h2>
           <p className="text-gray-600 dark:text-gray-400 max-w-lg mx-auto mb-8">
-            Post your job listings on our board to reach talented web designers and developers.
+            post your job offer here and i'll reach out to you if i'm interested
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-6">
-            <Link href="/job-board/post" className="btn-primary">
+            <button 
+              className="btn-primary"
+              onClick={handleOpenModal}
+            >
               post a job
-            </Link>
-            <Link href="/job-board/manage" className="btn-minimal">
-              manage listings
-            </Link>
+            </button>
           </div>
         </div>
       </div>
+      
+      {/* Job Post Modal */}
+      <JobPostModal 
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onSubmit={handleSubmitJob}
+      />
+      
+      {/* Job Detail Modal */}
+      <JobDetailModal
+        isOpen={isDetailModalOpen}
+        onClose={handleCloseDetailModal}
+        job={selectedJob}
+      />
     </div>
   );
 } 

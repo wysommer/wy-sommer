@@ -287,7 +287,7 @@ export default function Home() {
           <div className="text-center mt-12 slide-in-bottom delay-400">
             <div className="space-x-8">
               <Link href="/job-board" className="btn-primary">
-                job board
+                post a job offer
               </Link>
               <Link href="/contact" className="btn-minimal">
                 get in touch

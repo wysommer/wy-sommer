@@ -25,18 +25,16 @@
   --job-board-gradient: 139, 92, 246; /* Purple */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground: 238, 238, 238;
-    --background: 17, 17, 17;
-    
-    /* Dark mode minimal colors */
-    --primary: 238, 238, 238;
-    --secondary: 160, 160, 160;
-    --accent: 41, 41, 41;
-    --text: 238, 238, 238;
-    --text-light: 160, 160, 160;
-  }
+.dark {
+  --foreground: 238, 238, 238;
+  --background: 17, 17, 17;
+  
+  /* Dark mode minimal colors */
+  --primary: 238, 238, 238;
+  --secondary: 160, 160, 160;
+  --accent: 41, 41, 41;
+  --text: 238, 238, 238;
+  --text-light: 160, 160, 160;
 }
 
 /* Page gradient backgrounds */
@@ -74,27 +72,25 @@
 }
 
 /* Dark mode gradients */
-@media (prefers-color-scheme: dark) {
-  .gradient-home {
-    background: linear-gradient(to bottom, rgb(17, 17, 17), rgba(59, 130, 246, 0.9));
-    animation: smooth-hue-rotate 15s linear infinite;
-  }
-  
-  .gradient-portfolio {
-    background: linear-gradient(to bottom, rgb(17, 17, 17), rgba(var(--portfolio-gradient), 0.9));
-  }
-  
-  .gradient-resume {
-    background: linear-gradient(to bottom, rgb(17, 17, 17), rgba(var(--resume-gradient), 0.9));
-  }
-  
-  .gradient-contact {
-    background: linear-gradient(to bottom, rgb(17, 17, 17), rgba(var(--contact-gradient), 0.9));
-  }
-  
-  .gradient-job-board {
-    background: linear-gradient(to bottom, rgb(17, 17, 17), rgba(var(--job-board-gradient), 0.9));
-  }
+.dark .gradient-home {
+  background: linear-gradient(to bottom, rgb(17, 17, 17), rgba(59, 130, 246, 0.9));
+  animation: smooth-hue-rotate 15s linear infinite;
+}
+
+.dark .gradient-portfolio {
+  background: linear-gradient(to bottom, rgb(17, 17, 17), rgba(var(--portfolio-gradient), 0.9));
+}
+
+.dark .gradient-resume {
+  background: linear-gradient(to bottom, rgb(17, 17, 17), rgba(var(--resume-gradient), 0.9));
+}
+
+.dark .gradient-contact {
+  background: linear-gradient(to bottom, rgb(17, 17, 17), rgba(var(--contact-gradient), 0.9));
+}
+
+.dark .gradient-job-board {
+  background: linear-gradient(to bottom, rgb(17, 17, 17), rgba(var(--job-board-gradient), 0.9));
 }
 
 /* Base styles */

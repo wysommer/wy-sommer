@@ -5,7 +5,7 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: 'media', // or 'class' for manual dark mode toggle
+  darkMode: 'class', // changed from 'media' to 'class' for manual dark mode toggle
   theme: {
     extend: {
       colors: {
@@ -30,7 +30,7 @@ module.exports = {
           '100%': { opacity: '1' },
         },
         subtleFloat: {
-          '0%, 100%': { transform: 'translateY(0)' },
+          '0%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-5px)' },
         },
       },

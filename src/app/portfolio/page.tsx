@@ -9,7 +9,7 @@ const projects = [
     id: 1,
     title: "e-commerce platform",
     description: "responsive design for modern shopping",
-    imageUrl: "/next.svg", // Placeholder image
+    imageUrl: "/images/project1.jpg", // Placeholder image
     tags: ["React", "Next.js", "Tailwind"],
     category: "web"
   },
@@ -17,7 +17,7 @@ const projects = [
     id: 2,
     title: "corporate website",
     description: "elegant digital identity for business",
-    imageUrl: "/next.svg", // Placeholder image
+    imageUrl: "/images/project2.jpg", // Placeholder image
     tags: ["React", "Motion", "Tailwind"],
     category: "web"
   },
@@ -25,7 +25,7 @@ const projects = [
     id: 3,
     title: "mobile app ui",
     description: "intuitive interface for seamless experience",
-    imageUrl: "/next.svg", // Placeholder image
+    imageUrl: "/images/project3.jpg", // Placeholder image
     tags: ["React Native", "UI Design"],
     category: "mobile"
   },
@@ -33,7 +33,7 @@ const projects = [
     id: 4,
     title: "dashboard interface",
     description: "data visualization with clean aesthetics",
-    imageUrl: "/next.svg", // Placeholder image
+    imageUrl: "/images/project4.jpg", // Placeholder image
     tags: ["React", "D3.js", "UI Design"],
     category: "web"
   },
@@ -41,7 +41,7 @@ const projects = [
     id: 5,
     title: "brand identity",
     description: "cohesive visual language for a tech startup",
-    imageUrl: "/next.svg", // Placeholder image
+    imageUrl: "/images/project5.jpg", // Placeholder image
     tags: ["Branding", "Design"],
     category: "design"
   }
