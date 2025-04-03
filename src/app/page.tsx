@@ -181,7 +181,7 @@ export default function Home() {
       <div className="min-h-screen w-full flex flex-col items-center px-4 py-16 md:py-32 relative z-10">
         <div className="w-full max-w-6xl mx-auto">
           <div className="mb-16 md:mb-24 text-center slide-in-bottom">
-            <h1 className="font-grape-nuts text-6xl md:text-8xl mb-6 animate-float">
+            <h1 className="font-grape-nuts text-6xl md:text-8xl mb-6 animate-float pt-24 md:pt-6">
               Wÿ Sommer
             </h1>
             

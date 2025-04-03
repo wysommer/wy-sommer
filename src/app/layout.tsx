@@ -5,6 +5,7 @@ import Link from "next/link";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { MobileNav } from "@/components/MobileNav";
 
 const geist = Geist({
   variable: "--font-geist",
@@ -31,8 +32,13 @@ export default function RootLayout({
     <html lang="en" className={`${geist.variable} ${grapeNuts.variable}`} suppressHydrationWarning>
       <body className="min-h-screen relative bg-white text-black dark:bg-gray-950 dark:text-white transition-colors duration-300">
         <ThemeProvider>
-          {/* Navigation - four corners with minimal styling */}
-          <nav className="fixed w-full h-full pointer-events-none z-50">
+          {/* Mobile Navigation */}
+          <div className="md:hidden">
+            <MobileNav />
+          </div>
+
+          {/* Desktop Navigation - four corners with minimal styling */}
+          <nav className="fixed w-full h-full pointer-events-none z-50 hidden md:block">
             {/* Theme Toggle Button */}
             <ThemeToggle />
             

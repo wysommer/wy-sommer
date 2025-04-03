@@ -15,7 +15,7 @@ export function ThemeToggle() {
   // Use a simple placeholder during server-side rendering
   if (!mounted) {
     return (
-      <div className="fixed top-8 left-1/2 -translate-x-1/2 z-50 p-2 rounded-full bg-white dark:bg-gray-800 text-black dark:text-white shadow-md pointer-events-none">
+      <div className="fixed top-8 left-1/2 -translate-x-1/2 z-50 p-2 rounded-full bg-white dark:bg-gray-800 text-black dark:text-white shadow-md pointer-events-none hidden md:block">
         <div className="w-5 h-5" />
       </div>
     );
@@ -24,7 +24,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-      className="fixed top-8 left-1/2 -translate-x-1/2 z-50 p-2 rounded-full bg-white dark:bg-gray-800 text-black dark:text-white shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors pointer-events-auto"
+      className="fixed top-8 left-1/2 -translate-x-1/2 z-50 p-2 rounded-full bg-white dark:bg-gray-800 text-black dark:text-white shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors pointer-events-auto hidden md:block"
       aria-label="Toggle theme"
     >
       {resolvedTheme === "dark" ? (
