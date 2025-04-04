@@ -2,50 +2,8 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-
-// Sample project data (to be replaced with actual data from database)
-const projects = [
-  {
-    id: 1,
-    title: "e-commerce platform",
-    description: "responsive design for modern shopping",
-    imageUrl: "/images/project1.jpg", // Placeholder image
-    tags: ["React", "Next.js", "Tailwind"],
-    category: "web"
-  },
-  {
-    id: 2,
-    title: "corporate website",
-    description: "elegant digital identity for business",
-    imageUrl: "/images/project2.jpg", // Placeholder image
-    tags: ["React", "Motion", "Tailwind"],
-    category: "web"
-  },
-  {
-    id: 3,
-    title: "mobile app ui",
-    description: "intuitive interface for seamless experience",
-    imageUrl: "/images/project3.jpg", // Placeholder image
-    tags: ["React Native", "UI Design"],
-    category: "mobile"
-  },
-  {
-    id: 4,
-    title: "dashboard interface",
-    description: "data visualization with clean aesthetics",
-    imageUrl: "/images/project4.jpg", // Placeholder image
-    tags: ["React", "D3.js", "UI Design"],
-    category: "web"
-  },
-  {
-    id: 5,
-    title: "brand identity",
-    description: "cohesive visual language for a tech startup",
-    imageUrl: "/images/project5.jpg", // Placeholder image
-    tags: ["Branding", "Design"],
-    category: "design"
-  }
-];
+import Link from 'next/link';
+import { projects } from '@/data/projects';
 
 // Categories for filtering
 const categories = ["all", "web", "mobile", "design"];
@@ -90,7 +48,7 @@ export default function Portfolio() {
             >
               <div className="aspect-[3/2] w-full bg-gray-100 dark:bg-gray-900 mb-6 relative overflow-hidden">
                 <Image 
-                  src={project.imageUrl}
+                  src={project.portfolioImageUrl}
                   alt={project.title}
                   fill
                   className="object-cover"
@@ -113,9 +71,9 @@ export default function Portfolio() {
                 ))}
               </div>
               
-              <button className="border-anim text-sm">
+              <Link href={`/portfolio/${project.slug}`} className="border-anim text-sm">
                 view project
-              </button>
+              </Link>
             </div>
           ))}
         </div>

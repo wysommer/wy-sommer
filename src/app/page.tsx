@@ -3,45 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import Image from "next/image";
 import Link from "next/link";
-
-// Sample project data (to be replaced with actual data from database)
-const projects = [
-  {
-    id: 1,
-    title: "Wÿ Sommer",
-    description: "A minimalist personal portfolio",
-    tags: ["Next.js", "React", "TailwindCSS"],
-    imageUrl: "/images/wy01.png",
-  },
-  {
-    id: 2,
-    title: "AgencyJobs.Pro",
-    description: "full-stack agency job board site",
-    tags: ["Next.js", "Node.js", "Supabase"],
-    imageUrl: "/images/ajp01.png",
-  },
-  {
-    id: 3,
-    title: "written-art®",
-    description: "web design agency portfolio site",
-    tags: ["Next.js", "React", "Cursor AI"],
-    imageUrl: "/images/art01.png",
-  },
-  {
-    id: 4,
-    title: "Tropical Photo",
-    description: "portfolio site for a photographer",
-    tags: ["Framer", "Figma"],
-    imageUrl: "/images/tropical01.png",
-  },
-  {
-    id: 5,
-    title: "written-art® Framer",
-    description: "web design agency framer site",
-    tags: ["Framer", "Figma"],
-    imageUrl: "/images/art02.png",
-  }
-];
+import { projects } from '@/data/projects';
 
 export default function Home() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -229,7 +191,7 @@ export default function Home() {
                     style={{ aspectRatio: '9/16' }}
                   >
                     {/* Project image */}
-                    <div className="relative h-full w-full">
+                    <Link href={`/portfolio/${project.slug}`} className="relative h-full w-full block">
                       <Image
                         src={project.imageUrl}
                         alt={project.title}
@@ -256,7 +218,7 @@ export default function Home() {
                           ))}
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   </div>
                 ))}
               </div>
