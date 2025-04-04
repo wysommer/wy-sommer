@@ -18,7 +18,7 @@ const projects = [
     title: "AgencyJobs.Pro",
     description: "full-stack agency job board site",
     tags: ["Next.js", "Node.js", "Supabase"],
-    imageUrl: "/images/project2.jpg",
+    imageUrl: "/images/ajp01.png",
   },
   {
     id: 3,
