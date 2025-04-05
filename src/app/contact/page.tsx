@@ -1,8 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
+import Script from 'next/script';
 
 export default function Contact() {
+  const searchParams = useSearchParams();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -11,6 +14,19 @@ export default function Contact() {
   });
   
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  
+  // Check for success parameter in URL (Formspree redirects back with ?success=true)
+  useEffect(() => {
+    if (searchParams.get('success') === 'true') {
+      setFormStatus('success');
+      setFormData({
+        name: '',
+        email: '',
+        message: '',
+        subject: 'general inquiry',
+      });
+    }
+  }, [searchParams]);
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -21,23 +37,17 @@ export default function Contact() {
   };
   
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+    // Don't prevent default as we want the form to submit to Formspree
     setFormStatus('submitting');
     
-    // Simulate form submission
     try {
-      // In a real application, you would send the form data to your API
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      setFormStatus('success');
-      setFormData({
-        name: '',
-        email: '',
-        message: '',
-        subject: 'general inquiry',
-      });
+      // Formspree will handle the submission via the form action
+      // The form will be submitted and the page will redirect
     } catch (error) {
       console.error('Error submitting form:', error);
       setFormStatus('error');
+      // Prevent default in case of error to allow showing error message
+      e.preventDefault();
     }
   };
   
@@ -67,7 +77,12 @@ export default function Contact() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-8">
+              <form 
+                action="https://formspree.io/f/mpwpyndy" 
+                method="POST" 
+                onSubmit={handleSubmit} 
+                className="space-y-8"
+              >
                 <div>
                   <label htmlFor="name" className="block text-sm mb-2 text-gray-600 dark:text-gray-400">
                     name
@@ -157,33 +172,22 @@ export default function Contact() {
           <div className="slide-in-bottom delay-300">
             <h2 className="font-grape-nuts text-3xl mb-8">schedule a meeting</h2>
             
-            <div className="h-[500px] border border-gray-200 dark:border-gray-800">
-              {/* In a real application, this would be replaced with an actual Calendly embed */}
-              <div className="w-full h-full flex items-center justify-center p-8">
-                <div className="text-center">
-                  <p className="text-gray-600 dark:text-gray-400 mb-8">
-                    Select a time that works for you, and let&apos;s discuss your project needs.
-                  </p>
-                  <div className="space-y-4">
-                    <p className="text-sm">Available time slots:</p>
-                    <div className="grid grid-cols-2 gap-4">
-                      <button className="btn-minimal text-sm">mon 10:00 am</button>
-                      <button className="btn-minimal text-sm">tue 2:00 pm</button>
-                      <button className="btn-minimal text-sm">wed 11:00 am</button>
-                      <button className="btn-minimal text-sm">thu 3:00 pm</button>
-                      <button className="btn-minimal text-sm">fri 9:00 am</button>
-                      <button className="btn-minimal text-sm">fri 1:00 pm</button>
-                    </div>
-                    <p className="text-xs text-gray-500 dark:text-gray-500 mt-8">
-                      Note: This is a placeholder for the Calendly integration
-                    </p>
-                  </div>
-                </div>
-              </div>
+            <div className="h-[650px] border border-gray-200 dark:border-gray-800">
+              <div 
+                className="calendly-inline-widget" 
+                data-url="https://calendly.com/contact-written-art/interview"
+                style={{ minWidth: '320px', height: '650px' }}
+              ></div>
             </div>
           </div>
         </div>
       </div>
+      
+      {/* Calendly Embed Script */}
+      <Script 
+        src="https://assets.calendly.com/assets/external/widget.js" 
+        strategy="lazyOnload"
+      />
     </div>
   );
 } 

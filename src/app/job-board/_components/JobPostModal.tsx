@@ -34,6 +34,7 @@ export default function JobPostModal({ isOpen, onClose, onSubmit }: JobPostModal
   });
   
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isFormspreeSubmitting, setIsFormspreeSubmitting] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -73,38 +74,71 @@ export default function JobPostModal({ isOpen, onClose, onSubmit }: JobPostModal
     return Object.keys(newErrors).length === 0;
   };
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (validateForm()) {
-      // Split requirements by new line and filter out empty strings
-      const requirementsArray = formData.requirements
-        .split('\n')
-        .map(req => req.trim())
-        .filter(req => req.length > 0);
+      setIsFormspreeSubmitting(true);
       
-      onSubmit({
-        title: formData.title.toLowerCase(), // Match existing format
-        company: formData.company,
-        location: formData.location,
-        salaryRange: formData.salaryRange,
-        description: formData.description,
-        requirements: requirementsArray,
-        type: formData.type,
-        website: formData.website
-      });
-      
-      // Reset form
-      setFormData({
-        title: '',
-        company: '',
-        location: '',
-        salaryRange: '',
-        description: '',
-        requirements: '',
-        type: 'Full-time',
-        website: ''
-      });
+      try {
+        // Split requirements by new line and filter out empty strings
+        const requirementsArray = formData.requirements
+          .split('\n')
+          .map(req => req.trim())
+          .filter(req => req.length > 0);
+        
+        // First, handle the Formspree submission manually
+        const formspreeResponse = await fetch('https://formspree.io/f/mpwpyndy', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            formType: 'job',
+            title: formData.title.toLowerCase(),
+            company: formData.company,
+            location: formData.location,
+            salaryRange: formData.salaryRange,
+            description: formData.description,
+            requirements: requirementsArray,
+            type: formData.type,
+            website: formData.website
+          }),
+        });
+        
+        if (!formspreeResponse.ok) {
+          throw new Error('Failed to submit form to Formspree');
+        }
+        
+        // If Formspree submission was successful, then handle local app state
+        onSubmit({
+          title: formData.title.toLowerCase(), // Match existing format
+          company: formData.company,
+          location: formData.location,
+          salaryRange: formData.salaryRange,
+          description: formData.description,
+          requirements: requirementsArray,
+          type: formData.type,
+          website: formData.website
+        });
+        
+        // Reset form
+        setFormData({
+          title: '',
+          company: '',
+          location: '',
+          salaryRange: '',
+          description: '',
+          requirements: '',
+          type: 'Full-time',
+          website: ''
+        });
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        // Show an error message to the user if needed
+      } finally {
+        setIsFormspreeSubmitting(false);
+      }
     }
   };
   
@@ -127,6 +161,8 @@ export default function JobPostModal({ isOpen, onClose, onSubmit }: JobPostModal
           </div>
           
           <form onSubmit={handleSubmit} className="space-y-6">
+            <input type="hidden" name="formType" value="job" />
+            
             <div>
               <label className="block text-sm mb-2 text-gray-600 dark:text-gray-400">
                 job title
@@ -272,9 +308,10 @@ export default function JobPostModal({ isOpen, onClose, onSubmit }: JobPostModal
               </button>
               <button
                 type="submit"
+                disabled={isFormspreeSubmitting}
                 className="btn-primary"
               >
-                submit listing
+                {isFormspreeSubmitting ? 'submitting...' : 'submit listing'}
               </button>
             </div>
           </form>
