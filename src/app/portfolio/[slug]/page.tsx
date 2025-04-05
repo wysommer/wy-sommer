@@ -6,9 +6,24 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { projects } from '@/data/projects';
 
+// Define a type for project data
+type Project = {
+  id: number;
+  title: string;
+  description: string;
+  fullDescription: string;
+  tags: string[];
+  imageUrl: string;
+  portfolioImageUrl: string;
+  category: string;
+  slug: string;
+  websiteUrl: string;
+  githubUrl: string;
+};
+
 export default function ProjectPage() {
   const { slug } = useParams();
-  const [project, setProject] = useState<any>(null);
+  const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -31,7 +46,7 @@ export default function ProjectPage() {
     return (
       <div className="min-h-screen w-full flex flex-col items-center justify-center gradient-portfolio">
         <h1 className="font-grape-nuts text-4xl mb-6">project not found</h1>
-        <p className="mb-8">The project you're looking for doesn't exist.</p>
+        <p className="mb-8">The project you&apos;re looking for doesn&apos;t exist.</p>
         <Link href="/portfolio" className="border-anim">
           back to portfolio
         </Link>
