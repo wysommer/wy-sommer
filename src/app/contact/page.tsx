@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Script from 'next/script';
 
-export default function Contact() {
+function ContactForm() {
   const searchParams = useSearchParams();
   const [formData, setFormData] = useState({
     name: '',
@@ -189,5 +189,24 @@ export default function Contact() {
         strategy="lazyOnload"
       />
     </div>
+  );
+}
+
+// Loading fallback component
+function ContactLoading() {
+  return (
+    <div className="min-h-screen py-32 px-8 gradient-contact">
+      <div className="max-w-6xl mx-auto text-center">
+        <p>Loading contact form...</p>
+      </div>
+    </div>
+  );
+}
+
+export default function Contact() {
+  return (
+    <Suspense fallback={<ContactLoading />}>
+      <ContactForm />
+    </Suspense>
   );
 } 
