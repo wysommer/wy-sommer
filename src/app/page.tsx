@@ -165,12 +165,29 @@ export default function Home() {
     setIsSliderDragging(true);
   };
   
+  const handleSliderTouchStart = (e: React.TouchEvent) => {
+    const slider = sliderRef.current;
+    if (!slider || !carouselRef.current) return;
+    
+    const rect = slider.getBoundingClientRect();
+    const touch = e.touches[0];
+    const position = ((touch.clientX - rect.left) / rect.width) * 100;
+    const newPosition = Math.max(0, Math.min(100, position));
+    
+    setSliderPosition(newPosition);
+    
+    // Set carousel scroll position based on slider
+    const carousel = carouselRef.current;
+    const targetScroll = (carousel.scrollWidth - carousel.clientWidth) * (newPosition / 100);
+    carousel.scrollLeft = targetScroll;
+  };
+  
   // Update slider control to support touch events
   <div 
     ref={sliderRef}
     className="relative h-1 bg-gray-200 dark:bg-gray-800 rounded-full my-4 cursor-pointer"
     onMouseDown={handleSliderMouseDown}
-    onTouchStart={handleSliderMouseDown} // Add touch support
+    onTouchStart={handleSliderTouchStart} // Use the correct touch event handler
   >
     {/* Slider handle */}
     <div 
@@ -292,7 +309,7 @@ export default function Home() {
                 ref={sliderRef}
                 className="relative h-1 bg-gray-200 dark:bg-gray-800 rounded-full my-4 cursor-pointer"
                 onMouseDown={handleSliderMouseDown}
-                onTouchStart={handleSliderMouseDown} // Add touch support
+                onTouchStart={handleSliderTouchStart} // Use the correct touch event handler
               >
                 {/* Slider handle */}
                 <div 
