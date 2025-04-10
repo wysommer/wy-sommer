@@ -153,7 +153,7 @@ export function MobileNav() {
             className="font-grape-nuts text-xl hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
             onClick={() => setIsOpen(false)}
           >
-            resume
+            resumé
           </Link>
           <Link
             href="/contact"
