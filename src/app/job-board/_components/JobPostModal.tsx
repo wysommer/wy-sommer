@@ -145,7 +145,7 @@ export default function JobPostModal({ isOpen, onClose, onSubmit }: JobPostModal
   if (!isOpen) return null;
   
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 pt-16 md:pt-4">
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 pt-16 md:pt-16">
       <div className="bg-white dark:bg-gray-900 w-full max-w-xl max-h-[80vh] md:max-h-[90vh] overflow-y-auto rounded">
         <div className="p-4 md:p-6">
           <div className="flex justify-between items-center mb-4 md:mb-6">

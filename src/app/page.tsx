@@ -50,6 +50,40 @@ export default function Home() {
     };
   }, [isSliderDragging]);
   
+  // Add touch event listeners for slider dragging
+  useEffect(() => {
+    const handleTouchMove = (e: TouchEvent) => {
+      if (isSliderDragging && sliderRef.current && carouselRef.current) {
+        const slider = sliderRef.current;
+        const rect = slider.getBoundingClientRect();
+        const touch = e.touches[0];
+        const position = Math.max(0, Math.min(100, ((touch.clientX - rect.left) / rect.width) * 100));
+        
+        // Update slider position
+        setSliderPosition(position);
+        
+        // Update carousel scroll position
+        const carousel = carouselRef.current;
+        const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+        carousel.scrollLeft = (maxScroll * position) / 100;
+      }
+    };
+    
+    const handleTouchEnd = () => {
+      setIsSliderDragging(false);
+    };
+    
+    if (isSliderDragging) {
+      window.addEventListener('touchmove', handleTouchMove);
+      window.addEventListener('touchend', handleTouchEnd);
+    }
+    
+    return () => {
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [isSliderDragging]);
+  
   // Update slider position when active index changes
   useEffect(() => {
     if (sliderRef.current) {
@@ -124,6 +158,34 @@ export default function Home() {
     e.stopPropagation(); // Prevent triggering the track's mousedown
     setIsSliderDragging(true);
   };
+  
+  // Update slider handle dragging to support touch events
+  const handleSliderHandleTouchStart = (e: React.TouchEvent) => {
+    e.stopPropagation(); // Prevent triggering the track's touchstart
+    setIsSliderDragging(true);
+  };
+  
+  // Update slider control to support touch events
+  <div 
+    ref={sliderRef}
+    className="relative h-1 bg-gray-200 dark:bg-gray-800 rounded-full my-4 cursor-pointer"
+    onMouseDown={handleSliderMouseDown}
+    onTouchStart={handleSliderMouseDown} // Add touch support
+  >
+    {/* Slider handle */}
+    <div 
+      ref={sliderHandleRef}
+      className="absolute top-1/2 transform -translate-y-1/2 h-5 w-5 bg-black dark:bg-white rounded-full cursor-grab active:cursor-grabbing touch-none"
+      style={{ left: `${sliderPosition}%` }}
+      onMouseDown={handleSliderHandleMouseDown}
+      onTouchStart={handleSliderHandleTouchStart} // Add touch support
+    />
+    {/* Active track */}
+    <div 
+      className="absolute top-0 left-0 h-full bg-black dark:bg-white rounded-full pointer-events-none"
+      style={{ width: `${sliderPosition}%` }}
+    />
+  </div>
   
   // Scroll to specific project
   // const scrollToProject = (index: number) => {
@@ -230,6 +292,7 @@ export default function Home() {
                 ref={sliderRef}
                 className="relative h-1 bg-gray-200 dark:bg-gray-800 rounded-full my-4 cursor-pointer"
                 onMouseDown={handleSliderMouseDown}
+                onTouchStart={handleSliderMouseDown} // Add touch support
               >
                 {/* Slider handle */}
                 <div 
@@ -237,6 +300,7 @@ export default function Home() {
                   className="absolute top-1/2 transform -translate-y-1/2 h-5 w-5 bg-black dark:bg-white rounded-full cursor-grab active:cursor-grabbing touch-none"
                   style={{ left: `${sliderPosition}%` }}
                   onMouseDown={handleSliderHandleMouseDown}
+                  onTouchStart={handleSliderHandleTouchStart} // Add touch support
                 />
                 {/* Active track */}
                 <div 

@@ -33,12 +33,12 @@ export default function RootLayout({
       <body className="min-h-screen relative bg-white text-black dark:bg-gray-950 dark:text-white transition-colors duration-300">
         <ThemeProvider>
           {/* Mobile Navigation */}
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <MobileNav />
           </div>
 
           {/* Desktop Navigation - four corners with minimal styling */}
-          <nav className="fixed w-full h-full pointer-events-none z-50 hidden md:block">
+          <nav className="fixed w-full h-full pointer-events-none z-50 hidden lg:block">
             {/* Theme Toggle Button */}
             <ThemeToggle />
             
