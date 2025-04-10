@@ -89,7 +89,7 @@ export default function Resume() {
     <div className="min-h-screen py-32 px-8 gradient-resume">
       <div className="max-w-4xl mx-auto">
         <h1 className="font-grape-nuts text-5xl md:text-7xl mb-16 text-center slide-in-bottom">
-          resume
+          resumé
         </h1>
         
         {/* Professional Experience - Minimal Timeline */}
@@ -118,7 +118,7 @@ export default function Resume() {
                   <p className="text-gray-600 dark:text-gray-400 mb-3">{job.company}</p>
                   
                   <div className={`overflow-hidden transition-all duration-500 ${
-                    expandedSection === job.id ? 'max-h-96' : 'max-h-0 md:max-h-20'
+                    expandedSection === job.id ? 'max-h-96' : 'max-h-0 md:max-h-0'
                   }`}>
                     <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">
                       {job.description}

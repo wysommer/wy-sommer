@@ -3,30 +3,19 @@
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Script from 'next/script';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 function ContactForm() {
   const searchParams = useSearchParams();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    website: '',
     message: '',
     subject: 'general inquiry',
   });
   
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-  
-  // Check for success parameter in URL (Formspree redirects back with ?success=true)
-  useEffect(() => {
-    if (searchParams.get('success') === 'true') {
-      setFormStatus('success');
-      setFormData({
-        name: '',
-        email: '',
-        message: '',
-        subject: 'general inquiry',
-      });
-    }
-  }, [searchParams]);
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -37,17 +26,37 @@ function ContactForm() {
   };
   
   const handleSubmit = async (e: React.FormEvent) => {
-    // Don't prevent default as we want the form to submit to Formspree
+    e.preventDefault();
     setFormStatus('submitting');
     
     try {
-      // Formspree will handle the submission via the form action
-      // The form will be submitted and the page will redirect
+      const response = await fetch("https://formspree.io/f/mpwpyndy", {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        setFormStatus('success');
+        setFormData({ 
+          name: '',
+          email: '',
+          website: '',
+          message: '',
+          subject: 'general inquiry',
+        });
+      } else {
+        console.error('Form submission failed:', response);
+        const errorData = await response.json().catch(() => ({}));
+        console.error('Error details:', errorData);
+        setFormStatus('error');
+      }
     } catch (error) {
       console.error('Error submitting form:', error);
       setFormStatus('error');
-      // Prevent default in case of error to allow showing error message
-      e.preventDefault();
     }
   };
   
@@ -64,9 +73,16 @@ function ContactForm() {
             <h2 className="font-grape-nuts text-3xl mb-8">send a message</h2>
             
             {formStatus === 'success' ? (
-              <div className="border border-gray-200 dark:border-gray-800 p-8 text-center">
+              <div className="border border-gray-200 dark:border-gray-800 p-8 text-center flex flex-col items-center">
                 <h3 className="font-grape-nuts text-2xl mb-4">message sent</h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-6">
+                <div className="w-32 h-32">
+                  <DotLottieReact
+                    src="https://lottie.host/3fe1fd40-9d64-4b42-9f99-c6356d7b613a/K7eAePXBmS.lottie"
+                    loop
+                    autoplay
+                  />
+                </div>
+                <p className="text-gray-600 dark:text-gray-400 mb-6 mt-4">
                   Thanks for reaching out. I&apos;ll get back to you soon.
                 </p>
                 <button 
@@ -78,8 +94,6 @@ function ContactForm() {
               </div>
             ) : (
               <form 
-                action="https://formspree.io/f/mpwpyndy" 
-                method="POST" 
                 onSubmit={handleSubmit} 
                 className="space-y-8"
               >
@@ -112,6 +126,21 @@ function ContactForm() {
                     required
                     className="w-full px-0 py-2 bg-transparent border-b border-gray-200 dark:border-gray-800 focus:border-black dark:focus:border-white outline-none transition-colors"
                     placeholder="your email"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="website" className="block text-sm mb-2 text-gray-600 dark:text-gray-400">
+                    website (optional)
+                  </label>
+                  <input
+                    type="url"
+                    id="website"
+                    name="website"
+                    value={formData.website}
+                    onChange={handleChange}
+                    className="w-full px-0 py-2 bg-transparent border-b border-gray-200 dark:border-gray-800 focus:border-black dark:focus:border-white outline-none transition-colors"
+                    placeholder="your website url"
                   />
                 </div>
                 
