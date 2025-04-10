@@ -66,7 +66,7 @@ export default function RootLayout({
             {/* Bottom Left - Resume */}
             <Link href="/resume" className="absolute bottom-8 left-8 pointer-events-auto hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
               <div className="font-grape-nuts text-xl">
-                resume
+                resumé
               </div>
             </Link>
             

@@ -6,27 +6,19 @@ import { useState } from 'react';
 const experience = [
   {
     id: 1,
-    title: "senior web developer",
-    company: "Tech Solutions Inc.",
-    period: "2020 - Present",
-    description: "Led development of enterprise web applications using React and Next.js. Implemented modern UI/UX principles and optimized for performance. Managed a team of 4 junior developers.",
-    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Team Leadership"]
+    title: "Software Engineer / Founder",
+    company: "written-art LLC",
+    period: "2025 - present",
+    description: "Designed & developed responsive websites and interactive experiences for various clients. Designed & developed multiple in-house software products using Next.js and React Native.",
+    skills: ["React", "React Native", "Next.js", "UI/UX Design", "Framer", "Figma", "Logo Design", "Branding"]
   },
   {
     id: 2,
-    title: "front-end developer",
-    company: "Creative Agency",
-    period: "2018 - 2020",
-    description: "Developed responsive websites and interactive experiences for various clients. Collaborated with designers to implement pixel-perfect designs. Improved site performance by 40%.",
-    skills: ["JavaScript", "React", "SCSS", "Performance Optimization"]
-  },
-  {
-    id: 3,
-    title: "ui/ux designer",
-    company: "Digital Studio",
-    period: "2016 - 2018",
-    description: "Created user interfaces for web and mobile applications. Conducted user research and usability testing. Developed wireframes and prototypes using Figma and Sketch.",
-    skills: ["UI Design", "UX Research", "Figma", "Sketch", "Prototyping"]
+    title: "Front End Developer Internship",
+    company: "Front End Simplified",
+    period: "2024 - 2025",
+    description: "Converted a static web design into a responsive web application using React, HTML, CSS, and JavaScript. Used Git and Github to manage version control. Implemented smooth animations and transitions in React.",
+    skills: ["React", "Git", "Github", "Cursor AI", "Javascript"]
   }
 ];
 
@@ -70,8 +62,8 @@ const education = [
 
 const skills = [
   { category: "development", items: ["Cursor AI", "JavaScript", "TypeScript", "React", "Next.js", "Node.js", "HTML/CSS", "Tailwind CSS"] },
-  { category: "design", items: ["UI/UX Design", "Wireframing", "Prototyping", "Figma", "Adobe Creative Suite"] },
-  { category: "other", items: ["Project Management", "Team Leadership", "Agile Methodology", "Performance Optimization"] }
+  { category: "design", items: ["UI/UX Design", "Wireframing", "Prototyping", "Figma", "Framer", "Adobe Creative Suite", "Logo Design", "Branding"] },
+  { category: "other", items: ["Project Management", "Team Leadership", "Agile Methodology", "Performance Optimization", "Git/GitHub", "SEO", "Social Media Marketing", "Compassion"] }
 ];
 
 export default function Resume() {
