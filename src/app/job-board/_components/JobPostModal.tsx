@@ -145,11 +145,11 @@ export default function JobPostModal({ isOpen, onClose, onSubmit }: JobPostModal
   if (!isOpen) return null;
   
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-      <div className="bg-white dark:bg-gray-900 w-full max-w-xl max-h-[90vh] overflow-y-auto rounded">
-        <div className="p-6">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="font-grape-nuts text-3xl">post a job</h2>
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 pt-16 md:pt-4">
+      <div className="bg-white dark:bg-gray-900 w-full max-w-xl max-h-[80vh] md:max-h-[90vh] overflow-y-auto rounded">
+        <div className="p-4 md:p-6">
+          <div className="flex justify-between items-center mb-4 md:mb-6">
+            <h2 className="font-grape-nuts text-2xl md:text-3xl">post a job</h2>
             <button 
               onClick={onClose}
               className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
