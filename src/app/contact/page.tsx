@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
 import Script from 'next/script';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
