@@ -1,12 +1,11 @@
 'use client';
 
-import { useState, useEffect, Suspense } from 'react';
+import { useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Script from 'next/script';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 function ContactForm() {
-  const searchParams = useSearchParams();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
