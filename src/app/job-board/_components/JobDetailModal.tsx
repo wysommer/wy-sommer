@@ -13,14 +13,7 @@ export default function JobDetailModal({ isOpen, onClose, job }: JobDetailModalP
   
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-      <style jsx>{`
-        @media (max-height: 700px) {
-          .modal-top-padding {
-            margin-top: 55px;
-          }
-        }
-      `}</style>
-      <div className="bg-white dark:bg-gray-900 w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded modal-top-padding">
+      <div className="bg-white dark:bg-gray-900 w-full max-w-2xl max-h-[80vh] overflow-y-auto rounded">
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">
             <h2 className="font-grape-nuts text-3xl">{job.title}</h2>
