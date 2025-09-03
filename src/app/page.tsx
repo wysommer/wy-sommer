@@ -229,7 +229,7 @@ export default function Home() {
             {/* Profile photo outside of gradient effects */}
             <div className="w-16 h-16 md:w-20 md:h-20 mx-auto mb-6 relative overflow-hidden rounded-full">
               <Image 
-                src="/images/profile.JPG"
+                src="/images/profile.png"
                 alt="Wÿ Sommer profile"
                 width={80}
                 height={80}
@@ -242,7 +242,7 @@ export default function Home() {
             </p>
             
             <p className="font-grape-nuts text-base md:text-lg mb-12 text-gray-600 dark:text-gray-300 max-w-prose-narrow mx-auto font-semibold">
-              about me: i love color, i love designing, i love creating. i&apos;m from New York, i&apos;m a pisces, i&apos;m organized.
+              about me: i love color, i love designing, i love creating. i&apos;m a Christian, i&apos;m from New York, i&apos;m a father and husband, i&apos;m very organized.
             </p>
           </div>
           

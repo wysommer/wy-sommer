@@ -6,19 +6,35 @@ import { useState } from 'react';
 const experience = [
   {
     id: 1,
-    title: "Software Engineer / Founder",
-    company: "written-art LLC",
+    title: "Founder / Software Engineer",
+    company: "16:7 Studio Inc.",
     period: "2025 - present",
-    description: "Designed & developed responsive websites and interactive experiences for various clients. Designed & developed multiple in-house software products using Next.js and React Native.",
-    skills: ["React", "React Native", "Next.js", "UI/UX Design", "Framer", "Figma", "Logo Design", "Branding"]
+    description: "Designed & developed two Christianity focused software products, one with Next.js and the other with React Native.",
+    skills: ["React", "Next.js", "React Native", "TailwindCSS", "OpenAI API", "Clerk Authentication", "Supabase", "Vercel", "UI/UX Design", "Cursor", "Logo Design", "Branding"]
   },
   {
     id: 2,
-    title: "Front End Developer Internship",
-    company: "Front End Simplified",
+    title: "Freelance Web Developer",
+    company: "written-art LLC",
+    period: "2025 - present",
+    description: "Designed & developed responsive websites and interactive experiences for various clients.",
+    skills: ["React", "Next.js", "Vercel", "UI/UX Design", "Framer", "Figma", "Logo Design", "Branding"]
+  },
+  {
+    id: 3,
+    title: "Frontend Engineer Internship",
+    company: "Skinstric AI",
+    period: "2024 - 2025",
+    description: "Converted Figma designs into a dynamic web app that used an API to take an uploaded or captured image to provide personalized skincare advice.",
+    skills: ["React", "Next.js", "Vercel", "Figma to Code", "REST API's"]
+  },
+  {
+    id: 4,
+    title: "Frontend Developer Internship",
+    company: "Frontend Simplified",
     period: "2024 - 2025",
     description: "Converted a static web design into a responsive web application using React, HTML, CSS, and JavaScript. Used Git and Github to manage version control. Implemented smooth animations and transitions in React.",
-    skills: ["React", "Git", "Github", "Cursor AI", "Javascript"]
+    skills: ["React", "Next.js", "Git", "Github", "Vercel", "Javascript", "HTML", "CSS"]
   }
 ];
 
@@ -61,7 +77,7 @@ const education = [
 ];
 
 const skills = [
-  { category: "development", items: ["Cursor AI", "JavaScript", "TypeScript", "React", "Next.js", "Node.js", "HTML/CSS", "Tailwind CSS"] },
+  { category: "development", items: ["Cursor", "JavaScript", "TypeScript", "React", "Next.js", "Node.js", "HTML/CSS", "Tailwind CSS"] },
   { category: "design", items: ["UI/UX Design", "Wireframing", "Prototyping", "Figma", "Framer", "Adobe Creative Suite", "Logo Design", "Branding"] },
   { category: "other", items: ["Project Management", "Team Leadership", "Agile Methodology", "Performance Optimization", "Git/GitHub", "SEO", "Social Media Marketing", "Compassion"] }
 ];
@@ -175,7 +191,7 @@ export default function Resume() {
         <section className="mb-20 slide-in-bottom delay-400">
           <h2 className="font-grape-nuts text-3xl mb-12">skills</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div className="flex justify-between flex-col md:flex-row gap-10">
             {skills.map((skillGroup, index) => (
               <div key={index}>
                 <h3 className="font-grape-nuts text-xl mb-4">{skillGroup.category}</h3>
@@ -193,9 +209,14 @@ export default function Resume() {
         
         {/* Download Button - Minimal Style */}
         <div className="text-center mt-16 mb-8 slide-in-bottom delay-500">
-          <button className="btn-minimal">
+          <a 
+            href="/docs/wyatt-sommer-resume.pdf" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="btn-minimal inline-block"
+          >
             download cv
-          </button>
+          </a>
         </div>
       </div>
     </div>
