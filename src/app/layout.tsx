@@ -6,6 +6,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { MobileNav } from "@/components/MobileNav";
+import Footer from "@/components/Footer";
 
 const geist = Geist({
   variable: "--font-geist",
@@ -50,9 +51,9 @@ export default function RootLayout({
             </Link>
             
             {/* Job Board - Top Right (left of portfolio) */}
-            <Link href="/job-board" className="absolute top-8 right-36 pointer-events-auto hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+            <Link href="/job-board" className="absolute top-18 right-8 pointer-events-auto hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
               <div className="font-grape-nuts text-xl">
-                job offers
+                hire me
               </div>
             </Link>
             
@@ -82,6 +83,7 @@ export default function RootLayout({
             {children}
           </main>
         </ThemeProvider>
+        <Footer />
       </body>
     </html>
   );

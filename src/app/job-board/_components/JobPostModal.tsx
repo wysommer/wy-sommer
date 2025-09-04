@@ -13,6 +13,7 @@ export type JobListing = {
   date: string;
   type: string;
   website: string;
+  timeframe: string;
 };
 
 type JobPostModalProps = {
@@ -30,7 +31,8 @@ export default function JobPostModal({ isOpen, onClose, onSubmit }: JobPostModal
     description: '',
     requirements: '',
     type: 'Full-time',
-    website: ''
+    website: '',
+    timeframe: ''
   });
   
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -64,6 +66,7 @@ export default function JobPostModal({ isOpen, onClose, onSubmit }: JobPostModal
     if (!formData.requirements.trim()) newErrors.requirements = 'Requirements are required';
     if (!formData.type.trim()) newErrors.type = 'Job type is required';
     if (!formData.website.trim()) newErrors.website = 'Website is required';
+    if (!formData.timeframe.trim()) newErrors.timeframe = 'Timeframe is required';
     
     // Basic URL validation
     if (formData.website.trim() && !/^https?:\/\/.+\..+/.test(formData.website)) {
@@ -102,7 +105,8 @@ export default function JobPostModal({ isOpen, onClose, onSubmit }: JobPostModal
             description: formData.description,
             requirements: requirementsArray,
             type: formData.type,
-            website: formData.website
+            website: formData.website,
+            timeframe: formData.timeframe
           }),
         });
         
@@ -119,7 +123,8 @@ export default function JobPostModal({ isOpen, onClose, onSubmit }: JobPostModal
           description: formData.description,
           requirements: requirementsArray,
           type: formData.type,
-          website: formData.website
+          website: formData.website,
+          timeframe: formData.timeframe
         });
         
         // Reset form
@@ -130,8 +135,9 @@ export default function JobPostModal({ isOpen, onClose, onSubmit }: JobPostModal
           salaryRange: '',
           description: '',
           requirements: '',
-          type: 'Full-time',
-          website: ''
+          type: '',
+          website: '',
+          timeframe: ''
         });
       } catch (error) {
         console.error('Error submitting form:', error);
@@ -149,7 +155,7 @@ export default function JobPostModal({ isOpen, onClose, onSubmit }: JobPostModal
       <div className="bg-white dark:bg-gray-900 w-full max-w-xl max-h-[80vh] md:max-h-[90vh] overflow-y-auto rounded">
         <div className="p-4 md:p-6">
           <div className="flex justify-between items-center mb-4 md:mb-6">
-            <h2 className="font-grape-nuts text-2xl md:text-3xl">post a job</h2>
+            <h2 className="font-grape-nuts text-2xl md:text-3xl">submit a project</h2>
             <button 
               onClick={onClose}
               className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
@@ -165,7 +171,7 @@ export default function JobPostModal({ isOpen, onClose, onSubmit }: JobPostModal
             
             <div>
               <label className="block text-sm mb-2 text-gray-600 dark:text-gray-400">
-                job title
+                project title
               </label>
               <input
                 type="text"
@@ -230,12 +236,12 @@ export default function JobPostModal({ isOpen, onClose, onSubmit }: JobPostModal
             
             <div>
               <label className="block text-sm mb-2 text-gray-600 dark:text-gray-400">
-                salary range
+                budget
               </label>
               <input
                 type="text"
                 name="salaryRange"
-                placeholder="e.g. $80K - $100K"
+                placeholder="e.g. $1900 - $4900"
                 value={formData.salaryRange}
                 onChange={handleChange}
                 className={`w-full px-0 py-2 bg-transparent border-b ${
@@ -247,7 +253,7 @@ export default function JobPostModal({ isOpen, onClose, onSubmit }: JobPostModal
             
             <div>
               <label className="block text-sm mb-2 text-gray-600 dark:text-gray-400">
-                job type
+                project type
               </label>
               <select
                 name="type"
@@ -257,17 +263,17 @@ export default function JobPostModal({ isOpen, onClose, onSubmit }: JobPostModal
                   errors.type ? 'border-red-500' : 'border-gray-200 dark:border-gray-800'
                 } focus:border-black dark:focus:border-white outline-none transition-colors`}
               >
-                <option value="Full-time">Full-time</option>
-                <option value="Part-time">Part-time</option>
-                <option value="Contract">Contract</option>
-                <option value="Freelance">Freelance</option>
+                <option value="landing-page">Landing Page</option>
+                <option value="2-4-pages">2-4 Page Webite</option>
+                <option value="4-7-pages">4-7 Page Site</option>
+                <option value="7+pages">7+ Pages</option>
               </select>
               {errors.type && <p className="mt-1 text-xs text-red-500">{errors.type}</p>}
             </div>
             
             <div>
               <label className="block text-sm mb-2 text-gray-600 dark:text-gray-400">
-                job description
+                project description
               </label>
               <textarea
                 name="description"
@@ -290,12 +296,28 @@ export default function JobPostModal({ isOpen, onClose, onSubmit }: JobPostModal
                 value={formData.requirements}
                 onChange={handleChange}
                 rows={4}
-                placeholder="e.g. 5+ years of experience with React"
+                placeholder="custom animations, booking system, blog, etc."
                 className={`w-full px-0 py-2 bg-transparent border-b ${
                   errors.requirements ? 'border-red-500' : 'border-gray-200 dark:border-gray-800'
                 } focus:border-black dark:focus:border-white outline-none transition-colors`}
               />
               {errors.requirements && <p className="mt-1 text-xs text-red-500">{errors.requirements}</p>}
+            </div>
+            <div>
+              <label className="block text-sm mb-2 text-gray-600 dark:text-gray-400">
+                timeframe
+              </label>
+              <textarea
+                name="timeframe"
+                value={formData.timeframe}
+                onChange={handleChange}
+                rows={1}
+                placeholder="3 days, 1 week, etc."
+                className={`w-full px-0 py-2 bg-transparent border-b ${
+                  errors.timeframe ? 'border-red-500' : 'border-gray-200 dark:border-gray-800'
+                } focus:border-black dark:focus:border-white outline-none transition-colors`}
+              />
+              {errors.timeframe && <p className="mt-1 text-xs text-red-500">{errors.timeframe}</p>}
             </div>
             
             <div className="flex justify-end space-x-4 pt-4">
@@ -311,7 +333,7 @@ export default function JobPostModal({ isOpen, onClose, onSubmit }: JobPostModal
                 disabled={isFormspreeSubmitting}
                 className="btn-primary"
               >
-                {isFormspreeSubmitting ? 'submitting...' : 'submit listing'}
+                {isFormspreeSubmitting ? 'submitting...' : 'submit project'}
               </button>
             </div>
           </form>

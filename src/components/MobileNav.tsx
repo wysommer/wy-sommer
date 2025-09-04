@@ -139,7 +139,7 @@ export function MobileNav() {
             className="font-grape-nuts text-xl hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
             onClick={() => setIsOpen(false)}
           >
-            job offers
+            hire me
           </Link>
           <Link
             href="/portfolio"
