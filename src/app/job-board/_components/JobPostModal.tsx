@@ -264,9 +264,10 @@ export default function JobPostModal({ isOpen, onClose, onSubmit }: JobPostModal
                 } focus:border-black dark:focus:border-white outline-none transition-colors`}
               >
                 <option value="landing-page">Landing Page</option>
-                <option value="2-4-pages">2-4 Page Webite</option>
-                <option value="4-7-pages">4-7 Page Site</option>
-                <option value="7+pages">7+ Pages</option>
+                <option value="2-5-pages">2-5 Page Webite</option>
+                <option value="6-10-pages">6-10 Page Site</option>
+                <option value="10+pages">10+ Page Site</option>
+                <option value="full-stack-app">Full-Stack App</option>
               </select>
               {errors.type && <p className="mt-1 text-xs text-red-500">{errors.type}</p>}
             </div>

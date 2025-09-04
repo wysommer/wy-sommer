@@ -219,12 +219,26 @@ export default function Home() {
       {/* Background div with gradient */}
       <div className="fixed inset-0 z-0 gradient-home"></div>
       
-      <div className="min-h-screen w-full flex flex-col items-center px-4 py-16 md:py-32 relative z-10">
+      <div className="min-h-screen w-full flex flex-col items-center px-4 pt-16 pb-32 md:py-32 relative z-10">
         <div className="w-full max-w-6xl mx-auto">
           <div className="mb-16 md:mb-24 text-center slide-in-bottom">
             <h1 className="font-grape-nuts text-6xl md:text-8xl mb-6 animate-float pt-24 md:pt-6">
               Wÿ Sommer
             </h1>
+            <Image
+              src="/images/logo-white.png"
+              alt="written-art logo"
+              width={360}
+              height={120}
+              className="mx-auto mb-6 h-12 w-auto dark:block hidden"
+            />
+            <Image
+              src="/images/logo.png"
+              alt="written-art logo"
+              width={360}
+              height={120}
+              className="mx-auto mb-6 h-12 w-auto dark:hidden"
+            />
             
             {/* Profile photo outside of gradient effects */}
             <div className="w-16 h-16 md:w-20 md:h-20 mx-auto mb-6 relative overflow-hidden rounded-full">
@@ -241,8 +255,12 @@ export default function Home() {
               creating thoughtful digital experiences
             </p>
             
+            <p className="font-grape-nuts text-base md:text-lg mb-4 text-gray-600 dark:text-gray-300 max-w-prose-narrow mx-auto font-semibold">
+              <span className="font-sans text-sm">about me:</span> i&apos;ve been creating websites for 7 years. i&apos;m a Christian, i&apos;m from New York, i&apos;m a father and husband, and i love the beach.
+            </p>
+
             <p className="font-grape-nuts text-base md:text-lg mb-12 text-gray-600 dark:text-gray-300 max-w-prose-narrow mx-auto font-semibold">
-              about me: i love color, i love designing, i love creating. i&apos;m a Christian, i&apos;m from New York, i&apos;m a father and husband, i&apos;m very organized.
+              <span className="font-sans text-sm">my work:</span> i design and develop websites and apps with a creative and artistic focus. i like to assist people and companies who have a deeper purpose in their work.
             </p>
           </div>
           
@@ -332,7 +350,7 @@ export default function Home() {
           <div className="text-center mt-12 slide-in-bottom delay-400">
             <div className="space-x-8">
               <Link href="/job-board" className="btn-primary">
-                post a job offer
+                start a project
               </Link>
               <Link href="/contact" className="btn-minimal">
                 get in touch
