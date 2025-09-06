@@ -1,76 +1,118 @@
-'use client';
+"use client";
 
-import { useState, Suspense } from 'react';
-import Script from 'next/script';
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import { useState, Suspense } from "react";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import Image from "next/image";
 
 function ContactForm() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    website: '',
-    message: '',
-    subject: 'general inquiry',
+    name: "",
+    email: "",
+    website: "",
+    message: "",
+    subject: "general inquiry",
   });
-  
-  const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-  
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+
+  const [formStatus, setFormStatus] = useState<
+    "idle" | "submitting" | "success" | "error"
+  >("idle");
+
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
-  
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setFormStatus('submitting');
-    
+    setFormStatus("submitting");
+
     try {
       const response = await fetch("https://formspree.io/f/mpwpyndy", {
         method: "POST",
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          Accept: "application/json",
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
       });
 
       if (response.ok) {
-        setFormStatus('success');
-        setFormData({ 
-          name: '',
-          email: '',
-          website: '',
-          message: '',
-          subject: 'general inquiry',
+        setFormStatus("success");
+        setFormData({
+          name: "",
+          email: "",
+          website: "",
+          message: "",
+          subject: "general inquiry",
         });
       } else {
-        console.error('Form submission failed:', response);
+        console.error("Form submission failed:", response);
         const errorData = await response.json().catch(() => ({}));
-        console.error('Error details:', errorData);
-        setFormStatus('error');
+        console.error("Error details:", errorData);
+        setFormStatus("error");
       }
     } catch (error) {
-      console.error('Error submitting form:', error);
-      setFormStatus('error');
+      console.error("Error submitting form:", error);
+      setFormStatus("error");
     }
   };
-  
+
   return (
     <div className="min-h-screen py-32 px-8 gradient-contact">
       <div className="max-w-6xl mx-auto">
         <h1 className="font-grape-nuts text-5xl md:text-7xl mb-16 text-center slide-in-bottom">
           get in touch
         </h1>
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          {/* Apollo Meeting Scheduler Section - Minimal Design */}
+          <div className="slide-in-bottom delay-300">
+            {/* <h2 className="font-grape-nuts text-3xl mb-8">schedule a meeting</h2> */}
+
+            <div className="h-fit border border-white dark:border-gray-800 flex flex-col items-center justify-center p-8 text-center">
+              <div className="max-w-md">
+                <Image
+                  src="/images/profile.png"
+                  alt="Wy Sommer"
+                  width={100}
+                  height={100}
+                  className="rounded-full mb-6 h-24 w-24 mx-auto"
+                />
+                <h3 className="font-grape-nuts text-2xl mb-6">
+                  book a 15-minute <br />
+                  Strategy Session with me
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
+                  Ready to discuss your project? Click below to schedule a quick
+                  call and let&apos;s talk about how I can help bring your ideas
+                  to life.
+                </p>
+                <a
+                  href="https://app.apollo.io/#/meet/wyatt_sommer_dd0/15-min"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary inline-block"
+                >
+                  schedule meeting
+                </a>
+                <p className="text-sm text-gray-500 dark:text-gray-500 mt-4">
+                  Opens in a new window
+                </p>
+              </div>
+            </div>
+          </div>
           {/* Contact Form - Minimal Design */}
           <div className="slide-in-bottom delay-200">
             <h2 className="font-grape-nuts text-3xl mb-8">send a message</h2>
-            
-            {formStatus === 'success' ? (
+
+            {formStatus === "success" ? (
               <div className="border border-gray-200 dark:border-gray-800 p-8 text-center flex flex-col items-center">
                 <h3 className="font-grape-nuts text-2xl mb-4">message sent</h3>
                 <div className="w-32 h-32">
@@ -83,20 +125,20 @@ function ContactForm() {
                 <p className="text-gray-600 dark:text-gray-400 mb-6 mt-4">
                   Thanks for reaching out. I&apos;ll get back to you soon.
                 </p>
-                <button 
-                  onClick={() => setFormStatus('idle')}
+                <button
+                  onClick={() => setFormStatus("idle")}
                   className="btn-minimal"
                 >
                   send another message
                 </button>
               </div>
             ) : (
-              <form 
-                onSubmit={handleSubmit} 
-                className="space-y-8"
-              >
+              <form onSubmit={handleSubmit} className="space-y-8">
                 <div>
-                  <label htmlFor="name" className="block text-sm mb-2 text-gray-600 dark:text-gray-400">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm mb-2 text-gray-600 dark:text-gray-400"
+                  >
                     name
                   </label>
                   <input
@@ -110,9 +152,12 @@ function ContactForm() {
                     placeholder="your name"
                   />
                 </div>
-                
+
                 <div>
-                  <label htmlFor="email" className="block text-sm mb-2 text-gray-600 dark:text-gray-400">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm mb-2 text-gray-600 dark:text-gray-400"
+                  >
                     email
                   </label>
                   <input
@@ -126,9 +171,12 @@ function ContactForm() {
                     placeholder="your email"
                   />
                 </div>
-                
+
                 <div>
-                  <label htmlFor="website" className="block text-sm mb-2 text-gray-600 dark:text-gray-400">
+                  <label
+                    htmlFor="website"
+                    className="block text-sm mb-2 text-gray-600 dark:text-gray-400"
+                  >
                     website (optional)
                   </label>
                   <input
@@ -141,9 +189,12 @@ function ContactForm() {
                     placeholder="your website url"
                   />
                 </div>
-                
+
                 <div>
-                  <label htmlFor="subject" className="block text-sm mb-2 text-gray-600 dark:text-gray-400">
+                  <label
+                    htmlFor="subject"
+                    className="block text-sm mb-2 text-gray-600 dark:text-gray-400"
+                  >
                     subject
                   </label>
                   <select
@@ -154,14 +205,17 @@ function ContactForm() {
                     className="w-full px-0 py-2 bg-transparent border-b border-gray-200 dark:border-gray-800 focus:border-black dark:focus:border-white outline-none transition-colors"
                   >
                     <option value="general inquiry">general inquiry</option>
-                    <option value="job opportunity">job opportunity</option>
-                    <option value="project collaboration">project collaboration</option>
+                    <option value="website project">website project</option>
+                    <option value="app project">app project</option>
                     <option value="other">other</option>
                   </select>
                 </div>
-                
+
                 <div>
-                  <label htmlFor="message" className="block text-sm mb-2 text-gray-600 dark:text-gray-400">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm mb-2 text-gray-600 dark:text-gray-400"
+                  >
                     message
                   </label>
                   <textarea
@@ -175,18 +229,20 @@ function ContactForm() {
                     placeholder="your message"
                   ></textarea>
                 </div>
-                
+
                 <button
                   type="submit"
-                  disabled={formStatus === 'submitting'}
+                  disabled={formStatus === "submitting"}
                   className={`btn-primary mt-4 ${
-                    formStatus === 'submitting' ? 'opacity-70 cursor-not-allowed' : ''
+                    formStatus === "submitting"
+                      ? "opacity-70 cursor-not-allowed"
+                      : ""
                   }`}
                 >
-                  {formStatus === 'submitting' ? 'sending...' : 'send message'}
+                  {formStatus === "submitting" ? "sending..." : "send message"}
                 </button>
-                
-                {formStatus === 'error' && (
+
+                {formStatus === "error" && (
                   <p className="text-red-500 mt-4 text-sm">
                     There was an error sending your message. Please try again.
                   </p>
@@ -194,27 +250,8 @@ function ContactForm() {
               </form>
             )}
           </div>
-          
-          {/* Calendly Section - Minimal Design */}
-          <div className="slide-in-bottom delay-300">
-            <h2 className="font-grape-nuts text-3xl mb-8">schedule a meeting</h2>
-            
-            <div className="h-[650px] border border-gray-200 dark:border-gray-800">
-              <div 
-                className="calendly-inline-widget" 
-                data-url="https://calendly.com/contact-written-art/interview"
-                style={{ minWidth: '320px', height: '650px' }}
-              ></div>
-            </div>
-          </div>
         </div>
       </div>
-      
-      {/* Calendly Embed Script */}
-      <Script 
-        src="https://assets.calendly.com/assets/external/widget.js" 
-        strategy="lazyOnload"
-      />
     </div>
   );
 }
@@ -236,4 +273,4 @@ export default function Contact() {
       <ContactForm />
     </Suspense>
   );
-} 
+}

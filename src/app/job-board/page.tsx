@@ -214,10 +214,10 @@ export default function JobBoard() {
 
           <div className="mt-8 md:mt-0 flex flex-col gap-6">
             <button className="btn-primary" onClick={handleOpenModal}>
-              submit project
+              post a project request
             </button>
             <Link href="/contact" className="btn-minimal text-center">
-              contact me
+              contact me directly
             </Link>
           </div>
         </div>
@@ -422,7 +422,7 @@ export default function JobBoard() {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-6">
             <button className="btn-primary" onClick={handleOpenModal}>
-              post a job
+              post a project
             </button>
             <Link href="/contact" className="btn-minimal">
               contact me directly

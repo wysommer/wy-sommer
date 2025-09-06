@@ -227,7 +227,7 @@ export default function Home() {
       {/* Background div with gradient */}
       <div className="fixed inset-0 z-0 gradient-home"></div>
 
-      <div className="min-h-screen w-full flex flex-col items-center px-4 pt-16 pb-32 md:py-32 relative z-10">
+      <div className="min-h-screen w-full flex flex-col items-center px-4 py-32 relative z-10">
         <div className="w-full max-w-6xl mx-auto">
           <div className="mb-16 md:mb-24 text-center slide-in-bottom">
             <Image
@@ -270,7 +270,7 @@ export default function Home() {
               hi i&apos;m Wy
             </h3>
 
-            <p className="font-sans font-semibold text-lg md:text-xl mb-4 text-gray-900 dark:text-white max-w-prose-narrow mx-auto">
+            <p className="font-sans font-semibold text-xl mb-4 text-gray-900 dark:text-white max-w-prose-narrow mx-auto">
               designer, developer, and founder of 16:7 Studio™
             </p>
 

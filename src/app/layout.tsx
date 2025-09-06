@@ -20,8 +20,8 @@ const grapeNuts = Grape_Nuts({
 });
 
 export const metadata: Metadata = {
-  title: "Wÿ Sommer Portfolio",
-  description: "Personal portfolio website for Wÿ Sommer, showcasing web design and development projects.",
+  title: "Wÿ Sommer™ | written-art LLC",
+  description: "Professional web design and development agency | written-art™ by Wÿ Sommer™ | a 16:7 Studio™ company | creatively designed and expertly developed websites and apps - made with love.",
 };
 
 export default function RootLayout({

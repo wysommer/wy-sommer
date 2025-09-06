@@ -22,7 +22,7 @@ const experience = [
   },
   {
     id: 3,
-    title: "Frontend Engineer Internship",
+    title: "Frontend Engineer",
     company: "Skinstric AI",
     period: "2024 - 2025",
     description: "Converted Figma designs into a dynamic web app that used an API to take an uploaded or captured image to provide personalized skincare advice.",
@@ -30,7 +30,7 @@ const experience = [
   },
   {
     id: 4,
-    title: "Frontend Developer Internship",
+    title: "Frontend Developer",
     company: "Frontend Simplified",
     period: "2024 - 2025",
     description: "Converted a static web design into a responsive web application using React, HTML, CSS, and JavaScript. Used Git and Github to manage version control. Implemented smooth animations and transitions in React.",
@@ -208,7 +208,7 @@ export default function Resume() {
         </section>
         
         {/* Download Button - Minimal Style */}
-        <div className="text-center mt-16 mb-8 slide-in-bottom delay-500">
+        {/* <div className="text-center mt-16 mb-8 slide-in-bottom delay-500">
           <a 
             href="/docs/wyatt-sommer-resume.pdf" 
             target="_blank" 
@@ -216,6 +216,14 @@ export default function Resume() {
             className="btn-minimal inline-block"
           >
             download cv
+          </a>
+        </div> */}
+        <div className="text-center mt-16 mb-8 slide-in-bottom delay-500">
+          <a 
+            href="/contact" 
+            className="btn-minimal inline-block"
+          >
+            start a project
           </a>
         </div>
       </div>
