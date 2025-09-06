@@ -4,7 +4,7 @@ export default function Footer() {
                 <p className="text-center font-grape-nuts py-4 text-xs">
                     &copy; {new Date().getFullYear()} written-art LLC. All rights reserved.
                     <br />
-                    Wÿ Sommer™ • written-art™
+                    Wÿ Sommer™ • written-art™ • 16:7 Studio™
                 </p>
         </footer>
     );

@@ -100,7 +100,7 @@ export const projects = [
     portfolioImageUrl: "/images/portfolio/art-web-v2.png",
     category: "web",
     slug: "written-art-v2",
-    websiteUrl: "https://written-art.com",
+    websiteUrl: "https://written-art-v2.vercel.app",
     githubUrl: "https://github.com/wysommer/written-art-v2",
     fullDescription: "An alternative version of the written-art™ agency site utilizing the Aceternity UI library for rapid advanced animations and UI components."
   },
