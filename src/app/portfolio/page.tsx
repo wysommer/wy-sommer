@@ -86,6 +86,12 @@ export default function Portfolio() {
             </p>
           </div>
         )}
+
+        <div className="flex justify-center mt-12">
+          <Link href="/work-with-me" className="btn-primary">
+            start a project
+          </Link>
+        </div>
       </div>
     </div>
   );

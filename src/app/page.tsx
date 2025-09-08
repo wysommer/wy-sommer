@@ -381,11 +381,11 @@ export default function Home() {
           {/* Call to Action */}
           <div className="text-center mt-12 slide-in-bottom delay-400">
             <div className="space-x-8">
-              <Link href="/job-board" className="btn-primary">
-                start a project
+              <Link href="/work-with-me" className="btn-primary">
+                work with me
               </Link>
-              <Link href="/contact" className="btn-minimal">
-                get in touch
+              <Link href="/portfolio" className="btn-minimal">
+                portfolio
               </Link>
             </div>
           </div>

@@ -51,7 +51,7 @@ export default function RootLayout({
             </Link>
             
             {/* Job Board - Top Right (left of portfolio) */}
-            <Link href="/job-board" className="absolute top-18 right-8 pointer-events-auto hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+            <Link href="/work-with-me" className="absolute top-18 right-8 pointer-events-auto hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
               <div className="font-grape-nuts text-xl">
                 hire me
               </div>
