@@ -28,7 +28,7 @@ export default function WorkWithMe() {
               <div className="border border-white p-8">
                 <h3 className="font-grape-nuts text-2xl mb-4">🎨 Creative Vision</h3>
                 <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                  I don't just build websites—I craft digital experiences that tell your story and connect with your audience on an emotional level.
+                  I don&apos;t just build websites—I craft digital experiences that tell your story and connect with your audience on an emotional level.
                 </p>
               </div>
               
@@ -171,7 +171,7 @@ export default function WorkWithMe() {
             </h2>
             
             <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed text-lg">
-              Let's discuss your project and see how I can help bring your vision to life. 
+              Let&apos;s discuss your project and see how I can help bring your vision to life. 
               Book a free 15-minute strategy session to get started.
             </p>
             

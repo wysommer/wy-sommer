@@ -135,7 +135,7 @@ export function MobileNav() {
       >
         <div className="flex flex-wrap gap-y-3 justify-evenly">
           <Link
-            href="/job-board"
+            href="/work-with-me"
             className="font-grape-nuts text-xl hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
             onClick={() => setIsOpen(false)}
           >
