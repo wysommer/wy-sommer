@@ -177,6 +177,9 @@ export default function WorkWithMe() {
           <p className="text-gray-600 dark:text-gray-400 py-8 leading-relaxed text-md md:w-1/2 mx-auto text-center">
             prices are based on complexity, number of pages, types of features, and other factors. book a free consultation with me to get an exact price for your project.
           </p>
+          <h3 className="pt-8 text-gray-700 dark:text-gray-200 text-center text-lg md:text-xl font-bold font-sans">
+            Only 10 spots per month - Act fast!
+          </h3>
         </div>
 
         {/* CTA Section */}
