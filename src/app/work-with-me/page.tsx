@@ -155,6 +155,30 @@ export default function WorkWithMe() {
           </div>
         </div>
 
+        {/* Pricing Section */}
+        <div className="mb-20 slide-in-bottom delay-400">
+          <h2 className="font-grape-nuts text-4xl md:text-5xl mb-12 text-center">
+            my pricing
+          </h2>
+          <div className="flex flex-col md:flex-row justify-center gap-0 md:gap-8">
+            <div className="text-center p-8">
+              <h3 className="font-sans font-bold text-2xl mb-4">Websites</h3>
+              <p className="animated-gradient-green-blue text-3xl md:text-4xl font-bold leading-relaxed">
+                $1799 - $7799
+              </p>
+            </div>
+            <div className="text-center p-8">
+              <h3 className="font-sans font-bold text-2xl mb-4">Apps / Software</h3>
+              <p className="animated-gradient-blue-purple text-3xl md:text-4xl font-bold leading-relaxed">
+                $8799 - $39,799
+              </p>
+            </div>
+          </div>
+          <p className="text-gray-600 dark:text-gray-400 py-8 leading-relaxed text-md md:w-1/2 mx-auto text-center">
+            prices are based on complexity, number of pages, types of features, and other factors. book a free consultation with me to get an exact price for your project.
+          </p>
+        </div>
+
         {/* CTA Section */}
         <div className="text-center slide-in-bottom delay-500">
           <div className="border border-white p-12 max-w-2xl mx-auto">
