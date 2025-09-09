@@ -220,7 +220,7 @@ export default function Resume() {
         </div> */}
         <div className="text-center mt-16 mb-8 slide-in-bottom delay-500">
           <a 
-            href="/contact" 
+            href="/work-with-me" 
             className="btn-minimal inline-block"
           >
             start a project
